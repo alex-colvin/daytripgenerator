@@ -1,19 +1,6 @@
-# (5 points): As a developer, I want to make at least three commits with descriptive messages. 
-# (5 points): As a developer, I want to store my destinations, restaurants, mode of transportation, 
-# and entertainments in their own separate lists. 
-# (5 points): As a user, I want a destination to be randomly selected for my day trip. 
-# (5 points): As a user, I want a restaurant to be randomly selected for my day trip. 
-# (5 points): As a user, I want a mode of transportation to be randomly selected for my day trip. 
-# (5 points): As a user, I want a form of entertainment to be randomly selected for my day trip. 
-# (15 points): As a user, I want to be able to randomly re-select a destination, restaurant, mode of 
-# transportation, and/or form of entertainment if I don’t like one or more of those things. 
-# (10 points): As a user, I want to be able to confirm that my day trip is “complete” once I like all 
-# of the random selections. 
-# (10 points): As a user, I want to display my completed trip in the console. 
-# (5 points): As a developer, I want all of my functions to have a Single Responsibility. Remember, 
-# each function should do just one thing
 import random
 destinations =["Oak Island, North Carolina","Honolulu, Hawaii","Charleston, South Carolina","Epcot at Disney World, Orlando, Florida","Bar Harbor, Maine","Raleigh, North Carolina"]
+#selects list of restaurants for random selection based on randomly selected destination.
 def get_restaraunts_by_location (location):
     restaraunts =[""]
     oak_island_restaraunts = ["Swain's Seafood and Cut Restaurant","Turtle Island Restaurant","Shagger Jacks","Tranquil Harbour Restaurant & Bar","Little Bit's Grill","Thai By the Sea","Duffer's Pub & Grille","Long Beach Diner","Oak Island Sub Shop","Bob's Dogs"]
@@ -35,6 +22,7 @@ def get_restaraunts_by_location (location):
     elif location == "Raleigh, North Carolina":
         restaraunts = raleigh_restaraunts
     return restaraunts
+#changes the default transportation options based on available transportation at randomly selected locations.
 def get_transportation_by_location (location):
     modes_of_transportation = ["a Car","a Bus","a Train","an Uber","a Lyft"]
     if location == "Oak Island, North Carolina":
@@ -56,6 +44,7 @@ def get_transportation_by_location (location):
         modes_of_transportation.append("a Byrd Scooter")
         modes_of_transportation.append("a Trolley Pub Car")
     return modes_of_transportation
+#selects list of entertainment options based on randomly selected destination.
 def get_entertainment_by_location (location):
     entertainment =[""]
     oak_island_entertainment = ["Go Fishing on the Pier","Fly a Kite","Go Flounder Gigging at Night","Read a Book on the Beach","Play Beach Volleyball","Play Miniature Golf","Go to the Aquarium","Swim in the Waves"]
@@ -77,9 +66,11 @@ def get_entertainment_by_location (location):
     elif location == "Raleigh, North Carolina":
         entertainment = raleigh_entertainment
     return entertainment
+#randomly selects item from a list
 def get_random_selection (some_list):
     random_selection = random.choice(some_list)
     return random_selection
+#lets user choose y/n based on the randomly selected options.
 def get_user_choice(some_list, category_name):
     user_choice = "n"
     while user_choice.lower() == "n":
