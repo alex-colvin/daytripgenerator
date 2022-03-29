@@ -36,25 +36,25 @@ def get_restaraunts_by_location (location):
         restaraunts = raleigh_restaraunts
     return restaraunts
 def get_transportation_by_location (location):
-    modes_of_transportation = ["Car","Bus","Train","Uber","Lyft"]
+    modes_of_transportation = ["a Car","a Bus","a Train","an Uber","a Lyft"]
     if location == "Oak Island, North Carolina":
-        modes_of_transportation.append("Ferry")
+        modes_of_transportation.append("a Ferry")
         modes_of_transportation.append("My car. I'll come pick you up!")
     elif location == "Honolulu, Hawaii":
         modes_of_transportation[1] = "Da Bus"
-        modes_of_transportation.append("Super Ferry")
+        modes_of_transportation.append("the Super Ferry")
     elif location == "Charleston, South Carolina":
-        modes_of_transportation.append("Trolley")
-        modes_of_transportation.append("Horse and Buggy")
+        modes_of_transportation.append("a Trolley")
+        modes_of_transportation.append("a Horse and Buggy")
     elif location == "Epcot at Disney World, Orlando, Florida":
-        modes_of_transportation.append("Tram")
-        modes_of_transportation.append("Skyliner")
+        modes_of_transportation.append("the Tram")
+        modes_of_transportation.append("the Skyliner")
     elif location == "Bar Harbor, Maine":
-        modes_of_transportation.append("Bicycle")
-        modes_of_transportation.append("RV")
+        modes_of_transportation.append("a Bicycle")
+        modes_of_transportation.append("an RV")
     elif location == "Raleigh, North Carolina":
-        modes_of_transportation.append("Byrd Scooter")
-        modes_of_transportation.append("Trolley Pub Car")
+        modes_of_transportation.append("a Byrd Scooter")
+        modes_of_transportation.append("a Trolley Pub Car")
     return modes_of_transportation
 def get_entertainment_by_location (location):
     entertainment =[""]
@@ -99,8 +99,8 @@ final_mode_of_transportation = get_user_choice (modes_of_transportation, "Mode o
 forms_of_entertainment = get_entertainment_by_location (final_destination)
 final_form_of_entertainment = get_user_choice (forms_of_entertainment, "Form of Entertainment")
 print(f"""Congratulations! Your day trip booking is complete.
-You have chosen to travel to {final_destination}.
-You have chosen to dine at {final_restaurant}.
-You have chosen to use a/an {final_mode_of_transportation} to get around.
-You have chosen to {final_form_of_entertainment}.
+You have chosen to travel to '{final_destination}'.
+You have chosen to dine at '{final_restaurant}'.
+You have chosen to get around in/on '{final_mode_of_transportation}'.
+You have chosen to '{final_form_of_entertainment}'.
 Have a great time!!""")
