@@ -74,29 +74,42 @@ def get_random_selection (some_list):
 #lets user choose y/n based on the randomly selected options.
 def get_user_choice(some_list, category_name):
     user_choice = "n"
+    confirm = "n"
     backup_list = some_list.copy()
-    while user_choice.lower() == "n":
+    while user_choice.lower() == "n" and confirm.lower() == "n":
         random_selection = get_random_selection(some_list)
         user_choice = input(f"Your randomly selected {category_name} is '{random_selection}'. Do you like this choice? Enter y/n :")
-        if user_choice.lower() == 'n' and len(some_list) > 1:
+        if user_choice.lower() == 'n' and len(some_list) > 1 and confirm == 'n':
             print("Sorry, Let's try this again...")
             some_list.remove(random_selection)
-        elif user_choice.lower() == 'n' and len(some_list) == 1:
+        elif user_choice.lower() == 'n' and len(some_list) == 1 and confirm == 'n':
             print("My, my, my...You are a picky one. Thats all the choices. Let's try this again.")
             some_list = backup_list
             input("Press 'Enter' to continue.")
-        else:
-            print(f"Great Choice! You chose '{random_selection}'.")
+        elif user_choice.lower() == 'y':
+            confirm = input(f"Great Choice! You chose '{random_selection}'. Would you like to confirm this selection? Enter y/n:")
+            if confirm.lower() == 'n' and len(some_list) > 1 :
+                user_choice = 'n'
+                print("Sorry, Let's try this again...")
+                some_list.remove(random_selection)
+            elif confirm.lower() == 'n' and len(some_list) == 1 :
+                user_choice = 'n'
+                print("My, my, my...You are a picky one. Thats all the choices. Let's try this again.")
+                some_list = backup_list
+                input("Press 'Enter' to continue.")
+            else:                
+                input("Selection confirmed. Press 'Enter' to continue.")    
     return random_selection
+#gives user option to display trip choices
 def display_trip_choices (destination, restaurant, transportation, entertainment):
     user_input = input("Congratulations! Your day trip booking is complete. Would you like to see what your day will look like? Enter y/n :")
     if user_input.lower() == 'y':
-        print(f"""You have chosen to travel to '{destination}'.
+        input(f"""You have chosen to travel to '{destination}'.
 You have chosen to dine at '{restaurant}'.
 You have chosen to get around in/on '{transportation}'.
 You have chosen to '{entertainment}'.
-Have a great time!!""")
-        input("Press 'Enter' to exit.")
+Have a great time!!
+Press 'Enter' to exit.""")
     else:
         input("Press 'Enter' to exit.")
 final_destination = get_user_choice (destinations, "Destination")
