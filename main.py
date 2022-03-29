@@ -36,10 +36,10 @@ def get_restaraunts_by_location (location):
         restaraunts = raleigh_restaraunts
     return restaraunts
 def get_transportation_by_location (location):
-    modes_of_transportation = ["car","bus","train","uber","lyft"]
+    modes_of_transportation = ["Car","Bus","Train","Uber","Lyft"]
     if location == "Oak Island, North Carolina":
-        modes_of_transportation.append("ferry")
-        modes_of_transportation.append("I'll come pick you up!")
+        modes_of_transportation.append("Ferry")
+        modes_of_transportation.append("My car. I'll come pick you up!")
     elif location == "Honolulu, Hawaii":
         modes_of_transportation[1] = "Da Bus"
         modes_of_transportation.append("Super Ferry")
@@ -84,12 +84,12 @@ def get_user_choice(some_list, category_name):
     user_choice = "n"
     while user_choice.lower() == "n":
             random_selection = get_random_selection(some_list)
-            user_choice = input(f"Your randomly selected {category_name} is {random_selection}. Do you like this choice? Enter y/n :")
+            user_choice = input(f"Your randomly selected {category_name} is '{random_selection}'. Do you like this choice? Enter y/n :")
             if user_choice.lower() == 'n':
                 print("Sorry, Let's try this again...")
                 some_list.remove(random_selection)
             else:
-                print(f"Great Choice! You chose {random_selection}.")
+                print(f"Great Choice! You chose '{random_selection}'.")
     return random_selection
 final_destination = get_user_choice (destinations, "Destination")
 restaraunts = get_restaraunts_by_location (final_destination)
