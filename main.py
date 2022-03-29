@@ -1,4 +1,5 @@
 import random
+import copy
 destinations =["Oak Island, North Carolina","Honolulu, Hawaii","Charleston, South Carolina","Epcot at Disney World, Orlando, Florida","Bar Harbor, Maine","Raleigh, North Carolina"]
 #selects list of restaurants for random selection based on randomly selected destination.
 def get_restaraunts_by_location (location):
@@ -73,14 +74,18 @@ def get_random_selection (some_list):
 #lets user choose y/n based on the randomly selected options.
 def get_user_choice(some_list, category_name):
     user_choice = "n"
+    backup_list = some_list.copy()
     while user_choice.lower() == "n":
-            random_selection = get_random_selection(some_list)
-            user_choice = input(f"Your randomly selected {category_name} is '{random_selection}'. Do you like this choice? Enter y/n :")
-            if user_choice.lower() == 'n':
-                print("Sorry, Let's try this again...")
-                some_list.remove(random_selection)
-            else:
-                print(f"Great Choice! You chose '{random_selection}'.")
+        random_selection = get_random_selection(some_list)
+        user_choice = input(f"Your randomly selected {category_name} is '{random_selection}'. Do you like this choice? Enter y/n :")
+        if user_choice.lower() == 'n' and len(some_list) > 1:
+            print("Sorry, Let's try this again...")
+            some_list.remove(random_selection)
+        elif user_choice.lower() == 'n' and len(some_list) == 1:
+            print("My, my, my...You are a picky one. Thats all the choices. Let's try this again.")
+            some_list = backup_list
+        else:
+            print(f"Great Choice! You chose '{random_selection}'.")
     return random_selection
 final_destination = get_user_choice (destinations, "Destination")
 restaraunts = get_restaraunts_by_location (final_destination)
