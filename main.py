@@ -74,36 +74,37 @@ def get_random_selection (some_list):
 #lets user choose y/n based on the randomly selected options.
 def get_user_choice(some_list, category_name):
     user_choice = "n"
-    confirm = "n"
     backup_list = some_list.copy()
-    while user_choice.lower() == "n" and confirm.lower() == "n":
+    while user_choice.lower() == "n":
         random_selection = get_random_selection(some_list)
         user_choice = input(f"Your randomly selected {category_name} is '{random_selection}'. Do you like this choice? Enter y/n :")
-        if user_choice.lower() == 'n' and len(some_list) > 1 and confirm == 'n':
+        if user_choice.lower() == 'n' and len(some_list) > 1:
             print("Sorry, Let's try this again...")
             some_list.remove(random_selection)
-        elif user_choice.lower() == 'n' and len(some_list) == 1 and confirm == 'n':
+        elif user_choice.lower() == 'n' and len(some_list) == 1:
             print("My, my, my...You are a picky one. Thats all the choices. Let's try this again.")
             some_list = backup_list
             input("Press 'Enter' to continue.")
-        elif user_choice.lower() == 'y':
-            confirm = input(f"Great Choice! You chose '{random_selection}'. Would you like to confirm this selection? Enter y/n:")
-            if confirm.lower() == 'n' and len(some_list) > 1 :
-                user_choice = 'n'
-                print("Sorry, Let's try this again...")
-                some_list.remove(random_selection)
-            elif confirm.lower() == 'n' and len(some_list) == 1 :
-                user_choice = 'n'
-                print("My, my, my...You are a picky one. Thats all the choices. Let's try this again.")
-                some_list = backup_list
-                input("Press 'Enter' to continue.")
-            else:                
-                input("Selection confirmed. Press 'Enter' to continue.")    
+        else:
+            print(f"Great Choice! You chose '{random_selection}'.")  
     return random_selection
+#confirms user choices witht he option to reselect
+def confirm_user_choices (choice, category_name, some_list):
+    user_input = "n"
+    user_choice = choice
+    while user_input.lower() =="n":
+        user_input = input(f"Time to confirm your {category_name}. You a choose {choice}. Enter 'y' to confirm or 'n' to randomly reselect a {category_name} :")       
+        if user_input.lower() =="n":
+            user_choice = get_user_choice(some_list, category_name)
+            input(f"{user_choice} confirmed. Press 'Enter' to continue")
+            user_input = 'y'
+        else:
+            print("Selection confirmed.")
+    return user_choice
 #gives user option to display trip choices
 def display_trip_choices (destination, restaurant, transportation, entertainment):
     user_input = input("Congratulations! Your day trip booking is complete. Would you like to see what your day will look like? Enter y/n :")
-    if user_input.lower() == 'y':
+    if user_input.lower() != 'n':
         input(f"""You have chosen to travel to '{destination}'.
 You have chosen to dine at '{restaurant}'.
 You have chosen to get around in/on '{transportation}'.
@@ -119,4 +120,16 @@ modes_of_transportation = get_transportation_by_location (final_destination)
 final_mode_of_transportation = get_user_choice (modes_of_transportation, "Mode of Transportation")
 forms_of_entertainment = get_entertainment_by_location (final_destination)
 final_form_of_entertainment = get_user_choice (forms_of_entertainment, "Form of Entertainment")
+confirmed_destination = confirm_user_choices(final_destination, "Destination", destinations)
+if final_destination != confirmed_destination:
+    input("Your destination has changed! We need to rebook the rest of your trip. Press 'Enter' to continue")
+    restaraunts = get_restaraunts_by_location (final_destination)
+    final_restaurant = get_user_choice (restaraunts, "Restaurant")
+    modes_of_transportation = get_transportation_by_location (final_destination)
+    final_mode_of_transportation = get_user_choice (modes_of_transportation, "Mode of Transportation")
+    forms_of_entertainment = get_entertainment_by_location (final_destination)
+    final_form_of_entertainment = get_user_choice (forms_of_entertainment, "Form of Entertainment")
+confirmed_restaurant = confirm_user_choices(final_restaurant, "Restaurant", restaraunts)
+confirmed_mode_of_transportation = confirm_user_choices(final_mode_of_transportation, "Mode of Transportation", modes_of_transportation)
+confirmed_form_of_entertainment = confirm_user_choices(final_form_of_entertainment,"Form of Entertainment", forms_of_entertainment)
 display_trip_choices (final_destination, final_restaurant, final_mode_of_transportation, final_form_of_entertainment)
