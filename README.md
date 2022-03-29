@@ -1,2 +1,3 @@
 # daytripgenerator
-Generates random location, restaurant, and entertainment for a complete day trip. 
+Generates random location, restaurant, mode of transportation and entertainment for a complete day trip.
+(project for devCodeCamp)
