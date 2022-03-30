@@ -132,4 +132,4 @@ if final_destination != confirmed_destination:
 confirmed_restaurant = confirm_user_choices(final_restaurant, "Restaurant", restaraunts)
 confirmed_mode_of_transportation = confirm_user_choices(final_mode_of_transportation, "Mode of Transportation", modes_of_transportation)
 confirmed_form_of_entertainment = confirm_user_choices(final_form_of_entertainment,"Form of Entertainment", forms_of_entertainment)
-display_trip_choices (final_destination, final_restaurant, final_mode_of_transportation, final_form_of_entertainment)
+display_trip_choices (confirmed_destination, confirmed_restaurant, confirmed_mode_of_transportation, confirmed_form_of_entertainment)
